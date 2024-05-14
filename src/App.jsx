@@ -1,20 +1,24 @@
 import React from 'react'
-import  Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import HomeCards from './components/HomeCards'
-import JobListings from './components/JobListings'
-import ViewAllJobs from './components/ViewAllJobs'
+import HomePage from './pages/HomePage'
+import MainLayout from './layouts/MainLayout'
+
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider
+} from 'react-router-dom'     // we need these to create routers and add multiple pages. For each page, there should be a router
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<MainLayout />}>                {/*with this, all pages closed by '<Route path...>' share the MainLayout*/}
+      <Route index element={<HomePage />} />                 {/*the 'index' can be replaced by any path we need*/}
+    </Route>
+  )                           
+)
 
 const App = () => {
-  return (
-    <>
-      <Navbar />
-      <Hero title = 'Test Title' subtitle = 'This is the subtitle'/>
-      <HomeCards />
-      <JobListings />
-      <ViewAllJobs />
-    </>
-  )
+  return <RouterProvider router={router}/>
 }
 
 export default App

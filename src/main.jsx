@@ -5,6 +5,6 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <App />     {/** This is how we connect the Main component '<App />' with the <div> that has the id "root" */}
   </React.StrictMode>,
 )
