@@ -7,9 +7,10 @@ const JobListings = ({isHome = false}) => {         // here it means the variabl
     const [jobs, setJobs] = useState([]);           // by default this is empty. When the component loads, we will make a request and fill the array
     const [loading, setloading] = useState(true)    // this is used to show something when we are fetching data
 
+    // 'use effect' is a 'fetch on render' way to fetch data. There are many other ways to fetch data, such as 'Suspense', which is a fetch while render method
     useEffect(()=> {
         const fetchJobs = async () => {             // async makes a function return a Promise
-            const apiUrl = isHome ? 'http://localhost:8000/jobs?_limit=3' : 'http://localhost:8000/jobs'     // if it is HomePage, only show 3 jobs
+            const apiUrl = isHome ? '/api/jobs?_limit=3' : '/api/jobs'     // if it is HomePage, only show 3 jobs. Any time we want to use backend, we use '/api' because we set it in vite.config.js
             try{
                 const res = await fetch(apiUrl)           // await is to wait for a Promise and get its fulillment value
                 const data = await res.json()
