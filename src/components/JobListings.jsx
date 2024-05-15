@@ -32,7 +32,7 @@ const JobListings = ({isHome = false}) => {         // here it means the variabl
                 {isHome ? 'Recent Jobs' : 'All Jobs'}
             </h2>
             {loading ? (
-                <Spinner loading={loading}/>
+                <Spinner loading={loading}/>              
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {
