@@ -5,6 +5,7 @@ import JobsPage from './pages/JobsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import JobPage, {jobLoader} from './pages/JobPage'
 import AddJobPage from './pages/AddJobPage'
+import EditJobPage from './pages/EditJobPage'
 
 import {
   Route,
@@ -30,11 +31,23 @@ const App = () => {
   }
   
   // delete Job
-
   const deleteJob = async(id) =>{
     const res = await fetch(`/api/jobs/${id}`, {                    // this is to delete the new job in the json backend and backticks(``) are used to create template literals
       method: 'DELETE',
     })
+    return
+  }
+
+  //
+  const updateJob = async (job) => {
+    const res = await fetch(`/api/jobs/${job.id}`, {                    // this is to add the new job to the json backend. After this, we can find the new job in the '/jobs' and the backend API page
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(job)
+    })
+
     return
   }
 
@@ -44,6 +57,7 @@ const App = () => {
         <Route index element={<HomePage />} />                 {/*the 'index' can be replaced by any path we need*/}
         <Route path='/jobs' element={<JobsPage />}/>           {/*one page, one router */}
         <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob}/>} />   {/*the function 'addJob' will play as 'addJobSubmit' in the AddJobPage.jsx file*/}
+        <Route path='/edit-job/:id' element={<EditJobPage updateJobSubmit={updateJob}/>} loader={jobLoader}/>        
         <Route path='/jobs/:id' element={<JobPage deleteJob={deleteJob}/>} loader={jobLoader}/>        {/*':' means the 'id' is dynamic and loader is a built-in property*/}
         <Route path='*' element={<NotFoundPage />} />          {/*The '*' will cover all pages that we don't define and then show 404 */}
       </Route>

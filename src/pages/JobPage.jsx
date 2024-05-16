@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 const JobPage = ({deleteJob}) => {
     const navigate = useNavigate()
     const {id} = useParams()        // this is how we get the id of a job
-    const job = useLoaderData()
+    const job = useLoaderData()     // this is how we get the info of the job corresponding to the current page
 
     const onDeleteClick = (jobID) => {
         const confirm = window.confirm('Are you sure you want to delete this listing?')
@@ -93,10 +93,10 @@ const JobPage = ({deleteJob}) => {
                         <div className="bg-white p-6 rounded-lg shadow-md mt-6">
                         <h3 className="text-xl font-bold mb-6">Manage Job</h3>
                         <Link
-                            to={`/jobs/edit/${job.id}`}         
+                            to={`/edit-job/${job.id}`}         
                             className="bg-indigo-500 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
                             >Edit Job</Link
-                        >
+                        >                   {/*here, '/edit-job/${job.id}' determines the address of the edit page */}
                         <button onClick={() => onDeleteClick(job.id)}
                             className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
                         >                   {/* when we click this button, the job will be deleted.*/}
