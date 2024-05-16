@@ -3,15 +3,33 @@ import { useState } from 'react'
 
 const AddJobPage = () => {
   const [title, setTitle] = useState('')
-  const [type, setType] = useState('')
+  const [type, setType] = useState('Full-Time')
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
-  const [salary, setSalary] = useState('')
+  const [salary, setSalary] = useState('Under $50K')
   const [companyName, setCompanyName] = useState('')
   const [companyDescription, setCompanyDescription] = useState('')
   const [contactEmail, setContactEmail] = useState('')
   const [contactPhone, setContactPhone] = useState('')
-  
+  const submitForm = (e)=>{
+    e.preventDefault()          // we want to prevent the default 
+
+    const newJob = {            // the new job should have the same properties as the old ones
+      title,
+      type,
+      location,
+      description,
+      salary,
+      company: {
+        name: companyName,
+        description: companyDescription,
+        contactEmail,
+        contactPhone
+      }
+    }
+
+    console.log(newJob)
+  }
 
   return (
     <section className="bg-indigo-50">
@@ -19,7 +37,7 @@ const AddJobPage = () => {
         <div
           className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
         >
-          <form >
+          <form onSubmit={submitForm}>
             <h2 className="text-3xl text-center font-semibold mb-6">Add Job</h2>
 
             <div className="mb-4">
