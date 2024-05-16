@@ -32,7 +32,10 @@ const App = () => {
   // delete Job
 
   const deleteJob = async(id) =>{
-    console.log('delete', id)
+    const res = await fetch(`/api/jobs/${id}`, {                    // this is to delete the new job in the json backend and backticks(``) are used to create template literals
+      method: 'DELETE',
+    })
+    return
   }
 
   const router = createBrowserRouter(

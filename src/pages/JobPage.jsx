@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams, useLoaderData, useNavigate} from 'react-router-dom'
 import { FaArrowLeft, FaMapMarker } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 //here we can also use 'use effect' to fetch data but we choose to use a data loader
 const JobPage = ({deleteJob}) => {
@@ -14,6 +15,7 @@ const JobPage = ({deleteJob}) => {
         if(!confirm) 
             return
         deleteJob(jobID)
+        toast.success('Job deleted successfully')           // this is the message to show we deleted something
         navigate('/jobs')
     }
 
