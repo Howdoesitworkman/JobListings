@@ -13,20 +13,32 @@ import {
   RouterProvider
 } from 'react-router-dom'     // we need these to create routers and add multiple pages. For each page, there should be a router
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path='/' element={<MainLayout />}>                {/*with this, all pages closed by '<Route path...>' share the MainLayout*/}
-      <Route index element={<HomePage />} />                 {/*the 'index' can be replaced by any path we need*/}
-      <Route path='/jobs' element={<JobsPage />}/>           {/*one page, one router */}
-      <Route path='/add-job' element={<AddJobPage />} />
-      <Route path='/jobs/:id' element={<JobPage />} loader={jobLoader}/>        {/*':' means the 'id' is dynamic */}
-      <Route path='*' element={<NotFoundPage />} />          {/*The '*' will cover all pages that we don't define and then show 404 */}
-
-    </Route>
-  )                           
-)
 
 const App = () => {
+  const addJob = async (newJob) => {
+    const res = await fetch('/api/jobs', {                    // this is to add the new job to the json backend. After this, we can find the new job in the '/jobs' and the backend API page
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newJob)
+    })
+
+    return
+  }
+  
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path='/' element={<MainLayout />}>                {/*with this, all pages closed by '<Route path...>' share the MainLayout*/}
+        <Route index element={<HomePage />} />                 {/*the 'index' can be replaced by any path we need*/}
+        <Route path='/jobs' element={<JobsPage />}/>           {/*one page, one router */}
+        <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob}/>} />   {/*the function 'addJob' will play as 'addJobSubmit' in the AddJobPage.jsx file */}
+        <Route path='/jobs/:id' element={<JobPage />} loader={jobLoader}/>        {/*':' means the 'id' is dynamic */}
+        <Route path='*' element={<NotFoundPage />} />          {/*The '*' will cover all pages that we don't define and then show 404 */}
+      </Route>
+    )                           
+  )
+
   return <RouterProvider router={router}/>      
 }
 

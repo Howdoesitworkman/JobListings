@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const AddJobPage = () => {
+const AddJobPage = ({addJobSubmit}) => {            // addJobSubmit (a function) is a property for this jsx file
   const [title, setTitle] = useState('')
   const [type, setType] = useState('Full-Time')
   const [location, setLocation] = useState('')
@@ -11,6 +12,8 @@ const AddJobPage = () => {
   const [companyDescription, setCompanyDescription] = useState('')
   const [contactEmail, setContactEmail] = useState('')
   const [contactPhone, setContactPhone] = useState('')
+  const navigate = useNavigate()        // after we add a new job, we want to redirect to the jobs page showing the job list
+
   const submitForm = (e)=>{
     e.preventDefault()          // we want to prevent the default 
 
@@ -28,7 +31,9 @@ const AddJobPage = () => {
       }
     }
 
-    console.log(newJob)
+    addJobSubmit(newJob)
+
+    return navigate('/jobs')
   }
 
   return (
