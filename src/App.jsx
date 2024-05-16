@@ -15,6 +15,8 @@ import {
 
 
 const App = () => {
+
+  //add new job
   const addJob = async (newJob) => {
     const res = await fetch('/api/jobs', {                    // this is to add the new job to the json backend. After this, we can find the new job in the '/jobs' and the backend API page
       method: 'POST',
@@ -27,13 +29,19 @@ const App = () => {
     return
   }
   
+  // delete Job
+
+  const deleteJob = async(id) =>{
+    console.log('delete', id)
+  }
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />}>                {/*with this, all pages closed by '<Route path...>' share the MainLayout*/}
         <Route index element={<HomePage />} />                 {/*the 'index' can be replaced by any path we need*/}
         <Route path='/jobs' element={<JobsPage />}/>           {/*one page, one router */}
-        <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob}/>} />   {/*the function 'addJob' will play as 'addJobSubmit' in the AddJobPage.jsx file */}
-        <Route path='/jobs/:id' element={<JobPage />} loader={jobLoader}/>        {/*':' means the 'id' is dynamic */}
+        <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob}/>} />   {/*the function 'addJob' will play as 'addJobSubmit' in the AddJobPage.jsx file*/}
+        <Route path='/jobs/:id' element={<JobPage deleteJob={deleteJob}/>} loader={jobLoader}/>        {/*':' means the 'id' is dynamic and loader is a built-in property*/}
         <Route path='*' element={<NotFoundPage />} />          {/*The '*' will cover all pages that we don't define and then show 404 */}
       </Route>
     )                           
