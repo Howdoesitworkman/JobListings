@@ -1,8 +1,5 @@
-# React + Vite
+# About this project
+This is a project built with React and Vite. This application allows users to view, add, delete and update jobs.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# How to run this application
+To run this application on localhost, type "npm run dev" in the terminal and presee enter. To run the json server, type "npm run server" and press enter.
